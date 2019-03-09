@@ -39,6 +39,26 @@ function validation_errors($error_message)    {
         </div>';
 }
 
+function email_exists($email) {
+    $sql = "SELECT id FROM users WHERE email = '$email';";
+    $result = query($sql);
+    if (row_count($result) == 1)    {
+        return true;
+    }   else    {
+        return false;
+    }
+}
+
+function username_exists($username) {
+    $sql = "SELECT id FROM users WHERE username = '$username';";
+    $result = query($sql);
+    if (row_count($result) == 1)    {
+        return true;
+    }   else    {
+        return false;
+    }
+}
+
 // Validation Functions
 
 function validate_user_registration()   {
@@ -46,6 +66,7 @@ function validate_user_registration()   {
 
     $min = 3;
     $max = 20;
+    $email_max = 50;
 
     if ($_SERVER['REQUEST_METHOD'] == "POST")   {
         $first_name = clean($_POST['first_name']);
@@ -71,6 +92,10 @@ function validate_user_registration()   {
             $errors[] = "Your last name cannot be empty";
         }
 
+        if (username_exists($username)) {
+            $errors[] = "Username already taken";
+        }
+
         if (strlen($username) < $min || strlen($username) > $max)    {
             $errors[] = "Your username should be between {$min} and {$max} characters";
         }
@@ -79,8 +104,12 @@ function validate_user_registration()   {
             $errors[] = "Your username cannot be empty";
         }
 
-        if (strlen($email) > $max)  {
-            $errors[] = "Your email cannot be more than {$max} characters";
+        if (email_exists($email))   {
+            $errors[] = "Email is already registered";
+        }
+
+        if (strlen($email) > $email_max)  {
+            $errors[] = "Your email cannot be more than {$email_max} characters";
         }
 
         if ($password !== $confirm_password)    {
