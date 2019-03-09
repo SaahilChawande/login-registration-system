@@ -71,7 +71,14 @@ function validate_user_registration()   {
 
         if (!empty($errors))    {
             foreach ($errors as $error) {
-                echo $error;
+                echo '
+                    <div class="alert alert-danger alert-dismissable" role="alert">
+                        <strong>Warning!</strong> ' . $error . '
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                ';
             }
         }
     }
