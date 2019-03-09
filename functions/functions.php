@@ -59,6 +59,10 @@ function username_exists($username) {
     }
 }
 
+function send_email($email, $subject, $message, $headers)   {
+    return mail($email, $subject, $message, $headers);
+}
+
 // Validation Functions
 
 function validate_user_registration()   {
@@ -124,6 +128,8 @@ function validate_user_registration()   {
             if (register_user($first_name, $last_name, $username, $email, $password))   {
                 set_message("<p class='bg-success text-center'>Please check your email or spam folder for an activation link.</p>");
                 redirect("index.php");
+            } else  {
+                return false;
             }
         }
     }
@@ -150,6 +156,13 @@ function register_user($first_name, $last_name, $username, $email, $password)   
 
         $result = query($sql);
         confirm($result);
+
+        // Send email
+        $subject = "Activate Account";
+        $message = "Please click the link below to activate your account. <br> http://localhost/login-registration-system/activate.php?email=$email&code=$validation_code";
+        $headers = "From: no-reply@mywebsite.com";
+
+        send_email($email, $subject, $message, $headers);
 
         return true;
     }
