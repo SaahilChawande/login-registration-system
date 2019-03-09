@@ -29,6 +29,16 @@ function token_generator()  {
     return $token;
 }
 
+function validation_errors($error_message)    {
+    return '
+         <div class="alert alert-danger alert-dismissable" role="alert">
+            <strong>Warning!</strong> ' . $error_message . '
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>';
+}
+
 // Validation Functions
 
 function validate_user_registration()   {
@@ -69,16 +79,17 @@ function validate_user_registration()   {
             $errors[] = "Your username cannot be empty";
         }
 
+        if (strlen($email) > $max)  {
+            $errors[] = "Your email cannot be more than {$max} characters";
+        }
+
+        if ($password !== $confirm_password)    {
+            $errors[] = "Your password fields do not match";
+        }
+
         if (!empty($errors))    {
             foreach ($errors as $error) {
-                echo '
-                    <div class="alert alert-danger alert-dismissable" role="alert">
-                        <strong>Warning!</strong> ' . $error . '
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                ';
+                echo validation_errors($error);
             }
         }
     }
