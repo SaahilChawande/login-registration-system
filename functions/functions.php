@@ -18,7 +18,7 @@ function set_message($message)  {
 }
 
 function display_message()  {
-    if (issset($_SESSION['message']))   {
+    if (isset($_SESSION['message']))   {
         echo $_SESSION['message'];
         unset($_SESSION['message']);
     }
@@ -122,7 +122,8 @@ function validate_user_registration()   {
             }
         } else  {
             if (register_user($first_name, $last_name, $username, $email, $password))   {
-                echo "user registered";
+                set_message("<p class='bg-success text-center'>Please check your email or spam folder for an activation link.</p>");
+                redirect("index.php");
             }
         }
     }
