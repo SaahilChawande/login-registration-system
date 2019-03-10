@@ -5,4 +5,8 @@
 		<h1 class="text-center">Activate</h1>
 	</div>
 
+    <p>
+        <?php activate_user(); ?>
+    </p>
+
 <?php include 'includes/footer.php';?>

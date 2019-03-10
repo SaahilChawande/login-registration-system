@@ -129,11 +129,14 @@ function validate_user_registration()   {
                 set_message("<p class='bg-success text-center'>Please check your email or spam folder for an activation link.</p>");
                 redirect("index.php");
             } else  {
-                return false;
+                set_message("<p class='bg-danger text-center'>Sorry, we could not register the user.</p>");
+                redirect("index.php");
             }
         }
     }
 }
+
+// Register User Function
 
 function register_user($first_name, $last_name, $username, $email, $password)    {
     // Escape the data
@@ -165,5 +168,33 @@ function register_user($first_name, $last_name, $username, $email, $password)   
         send_email($email, $subject, $message, $headers);
 
         return true;
+    }
+}
+
+// Activate User Function
+
+function activate_user()    {
+    if ($_SERVER['REQUEST_METHOD'] == "GET")    {
+        if (isset($_GET['email']))  {
+            $email = clean($_GET['email']);
+            $validation_code = clean($_GET['code']);
+
+            $sql = "SELECT id FROM users WHERE email = '" . escape($_GET['email']) . "' AND validation_code = '" . escape($_GET['code']) . "';";
+            $result = query($sql);
+            confirm($result);
+
+            if (row_count($result) == 1) {
+                $sql2 = "UPDATE users SET active = 1, validation_code = '0' WHERE email = '" . escape($email) . "' AND validation_code = '" . escape($validation_code) . "';";
+                $result2 = query($sql2);
+                confirm($result2);
+
+                set_message("<p class='bg-success text-center'>Your account has been activated. Please login.</p>");
+
+                redirect("login.php");
+            }   else    {
+                set_message("<p class='bg-danger text-center'>Sorry, your account could not be activated.</p>");
+                redirect("login.php");
+            }
+        }
     }
 }
