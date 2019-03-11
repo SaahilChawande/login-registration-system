@@ -171,6 +171,37 @@ function register_user($first_name, $last_name, $username, $email, $password)   
     }
 }
 
+// Validate Login
+function validate_user_login()  {
+    $errors = [];
+
+    $min = 3;
+    $max = 20;
+    $email_max = 50;
+
+    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+        $email = clean($_POST['email']);
+        $password = clean($_POST['password']);
+
+        if (empty($email)) {
+            $errors[] = "Email field cannot be empty";
+        }
+
+        if (empty($password)) {
+            $errors[] = "Password field cannpot be empty";
+        }
+
+        if (!empty($errors)) {
+            foreach ($errors as $error) {
+                echo validation_errors($error);
+            }
+        } else {
+            echo "No Errors";
+
+        }
+    }
+}
+
 // Activate User Function
 
 function activate_user()    {
