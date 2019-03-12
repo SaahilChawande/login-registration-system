@@ -215,10 +215,21 @@ function login_user($email, $password)   {
         $row = fetch_array($result);
         $db_password = $row['password'];
         if (md5($password) === $db_password)    {
+            $_SESSION['email'] = $email;
             return true;
         }   else    {
             return false;
         }
+    }   else    {
+        return false;
+    }
+}
+
+// Logged In Function
+
+function logged_in()    {
+    if (isset($_SESSION['email']))  {
+        return true;
     }   else    {
         return false;
     }

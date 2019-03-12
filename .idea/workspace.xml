@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6c6da666-eabf-4c57-a61e-7ac9d0576170" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/functions/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/functions/functions.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -12,11 +13,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="23">
-              <caret line="1" column="35" selection-start-line="1" selection-start-column="35" selection-end-line="1" selection-end-column="35" />
+            <state relative-caret-position="115">
+              <caret line="5" column="29" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -57,11 +58,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/functions/functions.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="278">
-              <caret line="216" column="8" lean-forward="true" selection-start-line="216" selection-start-column="8" selection-end-line="216" selection-end-column="8" />
+            <state relative-caret-position="738">
+              <caret line="229" column="18" selection-start-line="229" selection-start-column="9" selection-end-line="229" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -112,7 +113,6 @@
       <list>
         <option value="$PROJECT_DIR$/includes/footer.php" />
         <option value="$PROJECT_DIR$/includes/nav.php" />
-        <option value="$PROJECT_DIR$/admin.php" />
         <option value="$PROJECT_DIR$/code.php" />
         <option value="$PROJECT_DIR$/recover.php" />
         <option value="$PROJECT_DIR$/reset.php" />
@@ -125,6 +125,7 @@
         <option value="$PROJECT_DIR$/activate.php" />
         <option value="$PROJECT_DIR$/login.php" />
         <option value="$PROJECT_DIR$/functions/functions.php" />
+        <option value="$PROJECT_DIR$/admin.php" />
       </list>
     </option>
   </component>
@@ -188,18 +189,18 @@
       <workItem from="1552066060555" duration="13721000" />
       <workItem from="1552226187531" duration="2716000" />
       <workItem from="1552382024816" duration="599000" />
-      <workItem from="1552384280771" duration="902000" />
+      <workItem from="1552384280771" duration="1424000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17938000" />
+    <option name="totallyTimeSpent" value="18460000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="846" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25973153" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25973153" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -262,13 +263,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="1" column="35" selection-start-line="1" selection-start-column="35" selection-end-line="1" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/login.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="115">
@@ -327,8 +321,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/functions/functions.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="216" column="8" lean-forward="true" selection-start-line="216" selection-start-column="8" selection-end-line="216" selection-end-column="8" />
+        <state relative-caret-position="738">
+          <caret line="229" column="18" selection-start-line="229" selection-start-column="9" selection-end-line="229" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="5" column="29" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
         </state>
       </provider>
     </entry>
