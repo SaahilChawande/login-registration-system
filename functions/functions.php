@@ -182,6 +182,7 @@ function validate_user_login()  {
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $email = clean($_POST['email']);
         $password = clean($_POST['password']);
+        $remember = isset($_POST['remember']);
 
         if (empty($email)) {
             $errors[] = "Email field cannot be empty";
@@ -196,7 +197,7 @@ function validate_user_login()  {
                 echo validation_errors($error);
             }
         } else {
-            if (login_user($email, $password))  {
+            if (login_user($email, $password, $remember))  {
                 redirect("admin.php");
             }   else    {
                 echo validation_errors("Your credentials are not correct.");
@@ -208,13 +209,16 @@ function validate_user_login()  {
 
 // User login function
 
-function login_user($email, $password)   {
+function login_user($email, $password, $remember)   {
     $sql = "SELECT password, id FROM users WHERE email = '" . escape($email) . "' AND active = 1;";
     $result = query($sql);
     if (row_count($result) == 1) {
         $row = fetch_array($result);
         $db_password = $row['password'];
         if (md5($password) === $db_password)    {
+            if ($remember == "on")  {
+                setcookie('email', $email, time() + 86400);
+            }
             $_SESSION['email'] = $email;
             return true;
         }   else    {
@@ -228,7 +232,7 @@ function login_user($email, $password)   {
 // Logged In Function
 
 function logged_in()    {
-    if (isset($_SESSION['email']))  {
+    if (isset($_SESSION['email']) || isset($_COOKIE['email']))  {
         return true;
     }   else    {
         return false;
