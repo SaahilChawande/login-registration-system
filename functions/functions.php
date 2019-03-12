@@ -209,13 +209,16 @@ function validate_user_login()  {
 // User login function
 
 function login_user($email, $password)   {
-    $sql = "SELECT password, id FROM users WHERE email = '" . escape($email) . "'";
+    $sql = "SELECT password, id FROM users WHERE email = '" . escape($email) . "' AND active = 1;";
     $result = query($sql);
     if (row_count($result) == 1) {
         $row = fetch_array($result);
         $db_password = $row['password'];
-
-        return true;
+        if (md5($password) === $db_password)    {
+            return true;
+        }   else    {
+            return false;
+        }
     }   else    {
         return false;
     }
