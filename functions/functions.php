@@ -196,9 +196,28 @@ function validate_user_login()  {
                 echo validation_errors($error);
             }
         } else {
-            echo "No Errors";
+            if (login_user($email, $password))  {
+                redirect("admin.php");
+            }   else    {
+                echo validation_errors("Your credentials are not correct.");
+            }
 
         }
+    }
+}
+
+// User login function
+
+function login_user($email, $password)   {
+    $sql = "SELECT password, id FROM users WHERE email = '" . escape($email) . "'";
+    $result = query($sql);
+    if (row_count($result) == 1) {
+        $row = fetch_array($result);
+        $db_password = $row['password'];
+
+        return true;
+    }   else    {
+        return false;
     }
 }
 
