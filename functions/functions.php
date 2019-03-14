@@ -336,7 +336,14 @@ function validate_code()  {
 // Reset Password
 
 function password_reset()    {
-    if (isset($_GET['email']) && isset($_GET['code']))  {
-        echo "it works";
+    if (isset($_COOKIE['temp_access_code'])) {
+        if (isset($_SESSION['token']) && $_POST['token'] === $_SESSION['token']) {
+            if (isset($_GET['email']) && isset($_GET['code'])) {
+
+            }
+        }
+    } else {
+        set_message("<p class='bg-danger text-center'>Sorry, your time has expired.</p>");
+        redirect("recover.php");
     }
 }
