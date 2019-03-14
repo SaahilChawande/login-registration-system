@@ -351,6 +351,8 @@ function password_reset()    {
 
                         set_message("<p class='bg-success text-center'>Your password has been updated. Please login.</p>");
                         redirect("login.php");
+                    }   else    {
+                        echo validation_errors("Password fields don't match");
                     }
                 }
             }
