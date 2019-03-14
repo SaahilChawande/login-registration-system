@@ -158,7 +158,6 @@ function register_user($first_name, $last_name, $username, $email, $password)   
         $sql .= " VALUES('{$first_name}', '{$last_name}', '{$username}', '{$email}', '{$password}', '{$validation_code}', 0);";
 
         $result = query($sql);
-        confirm($result);
 
         // Send email
         $subject = "Activate Account";
@@ -249,12 +248,10 @@ function activate_user()    {
 
             $sql = "SELECT id FROM users WHERE email = '" . escape($_GET['email']) . "' AND validation_code = '" . escape($_GET['code']) . "';";
             $result = query($sql);
-            confirm($result);
 
             if (row_count($result) == 1) {
                 $sql2 = "UPDATE users SET active = 1, validation_code = '0' WHERE email = '" . escape($email) . "' AND validation_code = '" . escape($validation_code) . "';";
                 $result2 = query($sql2);
-                confirm($result2);
 
                 set_message("<p class='bg-success text-center'>Your account has been activated. Please login.</p>");
 
@@ -281,7 +278,6 @@ function recover_password() {
 
                 $sql = "UPDATE users SET validation_code = '" . escape($validation_code) . "' WHERE email = '" . escape($email) . "';";
                 $result = query($sql);
-                confirm($result);
 
                 $subject = "Please reset your password.";
                 $message = "Here is your password reset code {$validation_code}.<br>Click here to reset your password http://localhost/login-registration-system/code.php?email=$email&code=$validation_code";
@@ -307,10 +303,25 @@ function recover_password() {
 
 // Code Validation
 
-function validation_code()  {
+function validate_code()  {
     if (isset($_COOKIE['temp_access_code']))    {
-        if ($_SERVER['REQUEST_METHOD'] == "GET")    {
-            if (isset($_GET['email']) && isset($_GET['code']))  {
+        if (!isset($_GET['email']) && !isset($_GET['code']))  {
+            redirect("index.php");
+        }   else if (empty($_GET['email']) || empty($_GET['code'])) {
+            redirect("index.php");
+        }   else    {
+            if (isset($_GET['code']))  {
+                $email = clean($_GET['email']);
+                $validation_code = clean($_GET['code']);
+
+                $sql = "SELECT id FROM users WHERE validation_code = '" . escape($validation_code) . "' AND email = '" . escape($email) . "';";
+                $result = query($sql);
+
+                if (row_count($result) ==1) {
+                    redirect("reset.php");
+                }   else    {
+                    echo validation_errors("Sorry, wrong validation code");
+                }
 
             }
         }
