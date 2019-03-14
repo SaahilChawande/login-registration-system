@@ -287,11 +287,13 @@ function recover_password() {
                 $message = "Here is your password reset code {$validation_code}.<br>Click here to reset your password http://localhost/login-registration-system/code.php?email=$email&code=$validation_code";
                 $headers = "From: no-reply@mywebsite.com";
 
-                if (send_email($email, $subject, $message, $headers))   {
-
-                }   else    {
+                if (!send_email($email, $subject, $message, $headers))   {
                     echo validation_errors("Email could not be sent.");
                 }
+
+                set_message("<p class='bg-success text-center'>Please check your email or spam folder for a password reset code.</p>");
+
+                redirect("index.php");
 
 
             }   else    {
@@ -300,5 +302,20 @@ function recover_password() {
         }   else    {
             redirect("index.php");
         }
+    }
+}
+
+// Code Validation
+
+function validation_code()  {
+    if (isset($_COOKIE['temp_access_code']))    {
+        if ($_SERVER['REQUEST_METHOD'] == "GET")    {
+            if (isset($_GET['email']) && isset($_GET['code']))  {
+
+            }
+        }
+    }   else    {
+        set_message("<p class='bg-danger text-center'>Sorry your validation cookie was expired.</p>");
+        redirect("recover.php");
     }
 }
