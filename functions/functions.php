@@ -319,7 +319,7 @@ function validate_code()  {
                 $result = query($sql);
 
                 if (row_count($result) ==1) {
-                    setcookie('temp_access_code', $validation_code, time() + 300);
+                    setcookie('temp_access_code', $validation_code, time() + 900);
                     redirect("reset.php?email=$email&code=$validation_code");
                 }   else    {
                     echo validation_errors("Sorry, wrong validation code");
@@ -337,9 +337,14 @@ function validate_code()  {
 
 function password_reset()    {
     if (isset($_COOKIE['temp_access_code'])) {
-        if (isset($_SESSION['token']) && $_POST['token'] === $_SESSION['token']) {
-            if (isset($_GET['email']) && isset($_GET['code'])) {
-
+        if (isset($_GET['email']) && isset($_GET['code'])) {
+            if (isset($_SESSION['token']) && isset($_POST['token'])) {
+                if ($_POST['token'] === $_SESSION['token']) {
+                    if ($_POST['password'] === $_POST['confirm_password']) {
+//                        $sql = "UPDATE users SET password = '" . escape($_POST['password']) . "' WHERE email = '" . escape($email) . "';";
+                        echo "passwords match";
+                    }
+                }
             }
         }
     } else {
