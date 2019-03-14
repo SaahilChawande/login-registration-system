@@ -296,6 +296,7 @@ function recover_password() {
                 echo validation_errors("This email does not exist");
             }
         }   else    {
+            set_message("<p class='bg-danger text-center'>Sorry your validation cookie was expired.</p>");
             redirect("index.php");
         }
     }
@@ -310,9 +311,9 @@ function validate_code()  {
         }   else if (empty($_GET['email']) || empty($_GET['code'])) {
             redirect("index.php");
         }   else    {
-            if (isset($_GET['code']))  {
+            if (isset($_POST['code']))  {
                 $email = clean($_GET['email']);
-                $validation_code = clean($_GET['code']);
+                $validation_code = clean($_POST['code']);
 
                 $sql = "SELECT id FROM users WHERE validation_code = '" . escape($validation_code) . "' AND email = '" . escape($email) . "';";
                 $result = query($sql);
