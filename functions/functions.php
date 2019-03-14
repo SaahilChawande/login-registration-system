@@ -272,7 +272,16 @@ function activate_user()    {
 function recover_password() {
     if ($_SERVER['REQUEST_METHOD'] == "POST")   {
         if (isset($_SESSION['token']) && $_POST['token'] === $_SESSION['token'])    {
-            echo "it works";
+            $email = clean($_POST['email']);
+            if (email_exists($email))   {
+
+                $validation_code = md5($email, microtime());
+
+                $subject = "Please reset your password.";
+                $message = "Here is your password reset code {$validation_code}.<br>Click here to reset your password http://localhost/login-registration-system/code.php?email=$email&code=$validation_code";
+                $headers = "From: no-reply@mywebsite.com";
+                send_email($email, $subject, $message, $headers);
+            }
         }
     }
 }
