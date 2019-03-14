@@ -283,9 +283,7 @@ function recover_password() {
                 $message = "Here is your password reset code {$validation_code}.<br>Click here to reset your password http://localhost/login-registration-system/code.php?email=$email&code=$validation_code";
                 $headers = "From: no-reply@mywebsite.com";
 
-                if (!send_email($email, $subject, $message, $headers))   {
-                    echo validation_errors("Email could not be sent.");
-                }
+                send_email($email, $subject, $message, $headers);
 
                 set_message("<p class='bg-success text-center'>Please check your email or spam folder for a password reset code.</p>");
 
