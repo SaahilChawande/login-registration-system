@@ -299,6 +299,10 @@ function recover_password() {
             set_message("<p class='bg-danger text-center'>Sorry your validation cookie was expired.</p>");
             redirect("index.php");
         }
+
+        if (isset($_POST['cancel_submit'])) {
+            redirect("login.php");
+        }
     }
 }
 
