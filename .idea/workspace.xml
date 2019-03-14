@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6c6da666-eabf-4c57-a61e-7ac9d0576170" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/functions/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/functions/functions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recover.php" beforeDir="false" afterPath="$PROJECT_DIR$/recover.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,8 +33,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/functions/functions.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="416">
-              <caret line="273" selection-start-line="273" selection-end-line="273" />
+            <state relative-caret-position="356">
+              <caret line="292" column="71" selection-start-line="292" selection-start-column="71" selection-end-line="292" selection-end-column="71" />
             </state>
           </provider>
         </entry>
@@ -126,8 +124,8 @@
         <option value="$PROJECT_DIR$/admin.php" />
         <option value="$PROJECT_DIR$/includes/nav.php" />
         <option value="$PROJECT_DIR$/logout.php" />
-        <option value="$PROJECT_DIR$/functions/functions.php" />
         <option value="$PROJECT_DIR$/recover.php" />
+        <option value="$PROJECT_DIR$/functions/functions.php" />
       </list>
     </option>
   </component>
@@ -198,17 +196,18 @@
       <workItem from="1552382024816" duration="599000" />
       <workItem from="1552384280771" duration="3594000" />
       <workItem from="1552552956275" duration="636000" />
-      <workItem from="1552555280589" duration="737000" />
+      <workItem from="1552555280589" duration="1860000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22003000" />
+    <option name="totallyTimeSpent" value="23126000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="846" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2671141" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2671141" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -340,8 +339,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/functions/functions.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="273" selection-start-line="273" selection-end-line="273" />
+        <state relative-caret-position="356">
+          <caret line="292" column="71" selection-start-line="292" selection-start-column="71" selection-end-line="292" selection-end-column="71" />
         </state>
       </provider>
     </entry>

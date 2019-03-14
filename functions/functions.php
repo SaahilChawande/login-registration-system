@@ -275,13 +275,30 @@ function recover_password() {
             $email = clean($_POST['email']);
             if (email_exists($email))   {
 
-                $validation_code = md5($email, microtime());
+                $validation_code = md5($email . microtime());
+
+                setcookie('temp_access_code', $validation_code, time() + 60);
+
+                $sql = "UPDATE users SET validation_code = '" . escape($validation_code) . "' WHERE email = '" . escape($email) . "';";
+                $result = query($sql);
+                confirm($result);
 
                 $subject = "Please reset your password.";
                 $message = "Here is your password reset code {$validation_code}.<br>Click here to reset your password http://localhost/login-registration-system/code.php?email=$email&code=$validation_code";
                 $headers = "From: no-reply@mywebsite.com";
-                send_email($email, $subject, $message, $headers);
+
+                if (send_email($email, $subject, $message, $headers))   {
+
+                }   else    {
+                    echo validation_errors("Email could not be sent.");
+                }
+
+
+            }   else    {
+                echo validation_errors("This email does not exist");
             }
+        }   else    {
+            redirect("index.php");
         }
     }
 }
