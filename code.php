@@ -1,7 +1,8 @@
 <?php include 'includes/header.php'; ?>
 
 	<div class="row">
-		<div class="col-lg-6 col-lg-offset-3">	
+		<div class="col-lg-6 col-lg-offset-3">
+            <?php display_message(); ?>
 		    <?php validate_code(); ?>
 			<div class="alert alert-success alert-dismissible" role="alert">
 				<button type="button" class="close" data-dismiss="alert">

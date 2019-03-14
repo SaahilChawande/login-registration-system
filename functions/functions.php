@@ -274,7 +274,7 @@ function recover_password() {
 
                 $validation_code = md5($email . microtime());
 
-                setcookie('temp_access_code', $validation_code, time() + 60);
+                setcookie('temp_access_code', $validation_code, time() + 900);
 
                 $sql = "UPDATE users SET validation_code = '" . escape($validation_code) . "' WHERE email = '" . escape($email) . "';";
                 $result = query($sql);
@@ -319,7 +319,8 @@ function validate_code()  {
                 $result = query($sql);
 
                 if (row_count($result) ==1) {
-                    redirect("reset.php");
+                    setcookie('temp_access_code', $validation_code, time() + 300);
+                    redirect("reset.php?email=$email&code=$validation_code");
                 }   else    {
                     echo validation_errors("Sorry, wrong validation code");
                 }
@@ -329,5 +330,13 @@ function validate_code()  {
     }   else    {
         set_message("<p class='bg-danger text-center'>Sorry your validation cookie was expired.</p>");
         redirect("recover.php");
+    }
+}
+
+// Reset Password
+
+function password_reset()    {
+    if (isset($_GET['email']) && isset($_GET['code']))  {
+        echo "it works";
     }
 }
