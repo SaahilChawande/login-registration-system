@@ -341,8 +341,12 @@ function password_reset()    {
             if (isset($_SESSION['token']) && isset($_POST['token'])) {
                 if ($_POST['token'] === $_SESSION['token']) {
                     if ($_POST['password'] === $_POST['confirm_password']) {
-//                        $sql = "UPDATE users SET password = '" . escape($_POST['password']) . "' WHERE email = '" . escape($email) . "';";
-                        echo "passwords match";
+                        $updated_password = md5($_POST['password']);
+                        $sql = "UPDATE users SET password = '" . escape($updated_password) . "', validation_code = 0 WHERE email = '" . escape($_GET['email']) . "';";
+                        query($sql);
+
+                        set_message("<p class='bg-success text-center'>Your password has been updated. Please login.</p>");
+                        redirect("login.php");
                     }
                 }
             }
