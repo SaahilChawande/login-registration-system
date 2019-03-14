@@ -266,3 +266,13 @@ function activate_user()    {
         }
     }
 }
+
+// Recover password function
+
+function recover_password() {
+    if ($_SERVER['REQUEST_METHOD'] == "POST")   {
+        if (isset($_SESSION['token']) && $_POST['token'] === $_SESSION['token'])    {
+            echo "it works";
+        }
+    }
+}
