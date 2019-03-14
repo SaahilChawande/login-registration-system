@@ -1,5 +1,7 @@
 <?php
 
+require './vendor/autoload.php';
+
 // Helper Functions
 function clean($string) {
     return htmlentities($string);
@@ -59,7 +61,35 @@ function username_exists($username) {
     }
 }
 
-function send_email($email, $subject, $message, $headers)   {
+function send_email($email = null, $subject = null, $message = null, $headers = null)   {
+
+    $mail = new PHPMailer\PHPMailer\PHPMailer();
+
+    $mail->isSMTP();
+    $mail->Host = Config::SMTP_HOST;
+    $mail->SMTPAuth = true;
+    $mail->Username = Config::SMTP_USER;
+    $mail->Password = Config::SMTP_PASSWORD;
+    $mail->SMTPSecure = 'tls';
+    $mail->Port = Config::SMTP_PORT;
+    $mail->isHTML(true);
+    $mail->CharSet = 'UTF-8';
+
+    $mail->setFrom('saahilchawande@gmail.com', 'Saahil Chawande');
+    $mail->addAddress($email);
+
+    $mail->Subject = $subject;
+    $mail->Body = $message;
+    $mail->AltBody = $message;
+
+    if (!$mail->send()) {
+        echo 'Mailer Error: ' . $mail->ErrorInfo;
+        return false;
+    }   else    {
+        return true;
+    }
+
+
     return mail($email, $subject, $message, $headers);
 }
 
@@ -151,7 +181,7 @@ function register_user($first_name, $last_name, $username, $email, $password)   
     }   else if (username_exists($username))    {
         return false;
     }   else    {
-        $password = md5($password);
+        $password = password_hash($password, PASSWORD_BCRYPT, array('cost'=>12));
         $validation_code = md5($username . microtime());
 
         $sql = "INSERT INTO users(first_name, last_name, username, email, password, validation_code, active)";
@@ -161,7 +191,7 @@ function register_user($first_name, $last_name, $username, $email, $password)   
 
         // Send email
         $subject = "Activate Account";
-        $message = "Please click the link below to activate your account. <br> http://localhost/login-registration-system/activate.php?email=$email&code=$validation_code";
+        $message = "Please click the <a href='http://localhost/login-registration-system/activate.php?email=$email&code=$validation_code'>here</a> to activate your account.";
         $headers = "From: no-reply@mywebsite.com";
 
         send_email($email, $subject, $message, $headers);
@@ -214,7 +244,7 @@ function login_user($email, $password, $remember)   {
     if (row_count($result) == 1) {
         $row = fetch_array($result);
         $db_password = $row['password'];
-        if (md5($password) === $db_password)    {
+        if (password_verify($password, $db_password))    {
             if ($remember == "on")  {
                 setcookie('email', $email, time() + 86400);
             }
@@ -280,7 +310,7 @@ function recover_password() {
                 $result = query($sql);
 
                 $subject = "Please reset your password.";
-                $message = "Here is your password reset code {$validation_code}.<br>Click here to reset your password http://localhost/login-registration-system/code.php?email=$email&code=$validation_code";
+                $message = "Here is your password reset code <b>{$validation_code}</b>.<br>Click <a href='http://localhost/login-registration-system/code.php?email=$email&code=$validation_code'>here</a> to reset your password.";
                 $headers = "From: no-reply@mywebsite.com";
 
                 send_email($email, $subject, $message, $headers);
@@ -344,7 +374,7 @@ function password_reset()    {
                 if ($_POST['token'] === $_SESSION['token']) {
                     if ($_POST['password'] === $_POST['confirm_password']) {
                         $updated_password = md5($_POST['password']);
-                        $sql = "UPDATE users SET password = '" . escape($updated_password) . "', validation_code = 0 WHERE email = '" . escape($_GET['email']) . "';";
+                        $sql = "UPDATE users SET password = '" . escape($updated_password) . "', validation_code = 0, active = 1 WHERE email = '" . escape($_GET['email']) . "';";
                         query($sql);
 
                         set_message("<p class='bg-success text-center'>Your password has been updated. Please login.</p>");

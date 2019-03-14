@@ -13,8 +13,10 @@
             <ul class="nav navbar-nav">
                 <li><a href="index.php">Home</a></li>
                 <?php if (logged_in()): ?>
-                <li><a href="admin.php">Admin</a></li>
+                    <li><a href="admin.php">Admin</a></li>
                     <li><a href="logout.php">Logout</a></li>
+                <?php else: ?>
+                    <li><a href="login.php">Login</a></li>
                 <?php endif; ?>
             </ul>
         </div><!--/.nav-collapse -->
